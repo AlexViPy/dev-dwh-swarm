@@ -1,0 +1,13 @@
+prod:
+  target: dev
+  outputs:
+    staging:
+      type: greenplum
+      host: localhost
+      user: test
+      password: test
+      port: 5432
+      dbname: greenplum
+      threads: 7
+      keepalives_idle: 0
+      connect_timeout: 5

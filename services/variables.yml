@@ -1,0 +1,2 @@
+TARGET_PROFILE: profiles/minio-site.xml
+TARGET_SQL: sql/export_test_data.sql
