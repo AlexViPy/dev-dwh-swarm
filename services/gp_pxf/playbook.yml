@@ -40,7 +40,7 @@
     - name: Copy a PROFILE into the container
       ansible.builtin.copy:
         src: "{{ TARGET_PROFILE }}"
-        dest: /usr/local/greenplum-db-6.11.1/pxf/pxf-conf/servers/default/{{ TARGET_PROFILE | split('/') | last | quote}}
+        dest: /usr/local/greenplum-db-6.11.1/pxf/pxf-conf/servers/default/{{ TARGET_PROFILE | split('/') | last | quote }}
 
     - name: Run queries from SQL script using UTF-8 client encoding for session
       ansible.builtin.shell:
