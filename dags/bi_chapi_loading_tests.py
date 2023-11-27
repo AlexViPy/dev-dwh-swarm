@@ -27,9 +27,9 @@ CHAPI__MSP_TO_DASHBOARDS = {
 
 CMD_PARAMS = [
     "locust -f /app/run/chapi_main.py",
-    "--loglevel ERROR",
-    "--logfile log.log",
-    "--headless -u 10 -r 1 -t 5m",
+    # "--loglevel ERROR",
+    # "--logfile log.log",
+    "--headless -u 10 -r 1 -t 10m",
     "--env dev",
     "--entity_name chapi",
     f"--yp_s3_access_code {Variable.get('YP_AWS_ACCESS_CODE')}",
@@ -52,9 +52,10 @@ with DAG(
                     container_name=f"{msp_serv.lower()}_{dash_name}",
                     image="bi-loading-tests:latest",
                     api_version="1.30",
-                    auto_remove=False,
+                    auto_remove=True,
                     mount_tmp_dir=False,
                     docker_url="tcp://docker-socket-proxy:2375",
                     command=f"{BASE_CMD} --csv={msp_serv}_{dash_name} --msp {msp_serv} --dash_name {dash_name}",
-                    network_mode="host"
+                    network_mode="host",
+                    skip_on_exit_code=1
                 )

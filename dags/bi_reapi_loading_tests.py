@@ -8,8 +8,8 @@ REAPI__MSP_SERVICES = ["BROKER_MSP", "INSURANCE_MSP", "TRANSPORT_MSP"]
 
 CMD_PARAMS = [
     "python -m locust -f /app/run/reapi_main.py",
-    "--loglevel INFO",
-    "--logfile log.log",
+    # "--loglevel ERROR",
+    # "--logfile log.log",
     "--headless -u 10 -r 1 -t 10m",
     "--env dev",
     "--entity_name reapi",
@@ -30,9 +30,10 @@ with DAG(
             container_name=f"{msp_serv.lower()}",
             image="bi-loading-tests:latest",
             api_version="1.30",
-            auto_remove=False,
+            auto_remove=True,
             mount_tmp_dir=False,
             docker_url="tcp://docker-socket-proxy:2375",
             command=f"{BASE_CMD} --csv={msp_serv} --msp {msp_serv}",
-            network_mode="host"
+            network_mode="host",
+            skip_on_exit_code=1
         )

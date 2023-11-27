@@ -314,7 +314,6 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - "./config/key/gcp_key_file.json:/usr/local/gcp_key_file.json"
       - "./config/pxf:/usr/local/greenplum-db/pxf/pxf-conf/servers/default"
       - gp_data:/data1
     environment:
